@@ -1,0 +1,17 @@
+<table>
+    <tr>
+        <th style="width:30%">Nombre</th>
+        <th style="width:30%">Username</th>
+        <th style="width:30%">DNI</th>
+        <th style="width:30%">Contraseña</th>
+    </tr>
+    
+        {{#each users}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.username}}</td>
+            <td>{{this.dni}}</td>
+            <td>{{this.password}}</td>
+        </tr>
+        {{/each}}
+</table>
