@@ -1,24 +1,21 @@
-//Código de DOM implementado por los docentes.
-
-/**
- * Obtiene el texto ingresado en el input "Usuario", sección "Login".
- * @returns String que contiene el nombre de usuario.
- */
 function getUser() {
-    return document.getElementById("username").value;
+    return document.getElementById("usuarioId").value;
 }
 
-/**
- * Obtiene el texto ingresado en el input "Contraseña", sección "Login".
- * @returns String que contiene la contraseña ingresada por el usuario.
- */
+
 function getPassword() {
-    return document.getElementById("password").value;
+    return document.getElementById("passwordId").value;
 }
 
-/**
- * Si se está mostrando la pantalla de login la oculta y muestra la de notas. Y viceversa.
- */
+function getDni() {
+    return document.getElementById("dni").value;
+}
+
+function getFullName() {
+    return document.getElementById("nameId").value;
+}
+
+
 function changeScreen() {
     const notepad = document.getElementById("notepad");
     const login = document.getElementById("login");
@@ -63,4 +60,3 @@ function getNoteCategory() {
 function getSearchID() {
     return document.getElementById("searchByID").value;
 }
-
