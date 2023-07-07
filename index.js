@@ -104,8 +104,8 @@ app.delete('/login', function(req, res) {
     res.send(null);
 });
 
-app.get('/table',async function(req, res) {
+app.get('/puntajes',async function(req, res) {
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuario")
-   res.render('table', {users: usuarios});
+   res.render('puntajes', {users: usuarios});
 });
 
