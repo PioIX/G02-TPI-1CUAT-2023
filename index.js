@@ -133,12 +133,12 @@ app.delete('/login', function(req, res) {
 });
 
 app.get('/table',async function(req, res) {
-    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
+    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios");
     res.render('table', {users: usuarios});
 });
 
 app.get('/puntajes',async function(req, res) {
-    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuario")
+    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuario");
    res.render('puntajes', {users: usuarios});
 });
 
