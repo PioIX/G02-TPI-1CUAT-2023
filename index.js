@@ -83,10 +83,8 @@ app.post('/login', async function(req, res)
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
     let verificar = 0
     for (i in usuarios) {
-        console.log(req.body.usuario)
-        console.log(usuarios[i].nombre_usuario)
-        if (usuarios[i].nombre_usuario == req.body.user) {
-            if (usuarios[i].contraseña_usuario == req.body.pass) {
+        if (usuarios[i].nombre_usuario == req.body.usuario) {
+            if (usuarios[i].contraseña_usuario == req.body.contraseña) {
                 verificar = 1
                 if (usuarios[i].usuario_admin == true) {
                     verificar = 2
@@ -95,10 +93,10 @@ app.post('/login', async function(req, res)
         }
     } 
         
-         
+    console.log(verificar)
     if (verificar == 0) {
         console.log("no existe user o no es valida contraseña")
-        res.send({validar:false})
+        res.render('login', null)
     }
     else if(verificar == 1) {
         console.log("logeado lv user normal")
@@ -146,6 +144,7 @@ app.get('/puntajes',async function(req, res) {
 
 app.post('/newWord',async function(req, res) {
     await MySQL.realizarQuery(`INSERT INTO palabras (nombre_palabra, definicion_palabra) VALUES("${req.body.wordName}","${req.body.wordDefinition}")`)
+    res.render('admin', null)
 })
 
 app.post('/deleteWord',async function(req, res) {

@@ -15,6 +15,19 @@ function getFullName() {
     return document.getElementById("nameId").value;
 }
 
+function changeScreenAdmin1() {
+  const firstSec = document.getElementById("editPalabra");
+  const secondSec = document.getElementById("editOther");
+  if (firstSec.style.display !== "none") {
+    firstSec.style.display = "none";
+    secondSec.style.display = "";
+  }
+  else {
+    firstSec.style.display = "";
+    secondSec.style.display = "none";
+  }
+
+}
 
 function changeScreen() {
     const notepad = document.getElementById("notepad");
@@ -38,7 +51,7 @@ async function putJSON(data) {
 
   try {
     const response = await fetch("/login", {
-      method: "POST", // or 'POST'
+      method: "PUT", // or 'POST'
       headers: {
         "Content-Type": "application/json",
       },
