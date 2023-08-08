@@ -1,7 +1,84 @@
-<h2><center>Bienvenido a la pagina de administrador! {{usuario}}</center></h2>
-<form action="/edit" method="GET" class="container-sm">
-    <div class="mb-3 form-check">
-        <input type="submit" class="btn btn-primary" value="Tabla">
-    </div>
-</form>
+<h2><center>Bienvenido a la pagina de administrador!</center></h2>
+<button class="form-check-control btn btn-info" onclick="changeScreenAdmin1()">Editar Palabras</button>
+<button class="form-check-control btn btn-info" onclick="">Otro</button>
+<section id="editPalabra" style="display: none;">
+    <table>
+        <tr>
+            <th style="width:30%">ID palabra</th>
+            <th style="width:30%">Nombre de la palabra</th>
+            <th style="width:30%">Definicion de la palabra</th>
+        </tr>
+        
+            {{#each words}}
+            <tr>
+                <td>{{id_palabra}}</td>
+                <td>{{nombre_palabra}}</td>
+                <td>{{definicion_palabra}}</td>
+            </tr>
+            {{/each}}
+    </table>
+    <form action="/newWord" method="POST" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Agregar Palabra</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <input class="form-control" type="text" id="newName" name="wordName" value="">
+            <label for="definicion">Definicion de la Palabra</label>
+            <input class="form-control" type="text" id="newDefinition" name="wordDefinition" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="submit" class="botonregistro" value="Agregar Palabra">
+            </div>
+        </div>
+    </form>
+    <form action="/deleteWord" method="POST" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Eliminar Palabra</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <input class="form-control" type="text" id="newName2" name="wordName2" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="submit" class="botonregistro" value="Eliminar palabra">
+            </div>
+        </div>
+    </form>
+    <form action="/editWord" method="POST" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Editar Palabra</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <input class="form-control" type="text" id="Name1" name="Name1" value="">
+            <label for="nuevonombre">Nuevo Nombre</label>
+            <input class="form-control" type="text" id="Name2" name="wordName3" value="">
+            <label for="definicionPalabra">Definicion de la palabra</label>
+            <input class="form-control" type="text" id="Def1" name="wordDef3" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="submit" class="botonregistro" value="Editar palabra">
+            </div>
+        </div>
+    </form>
+</section>
+<section id="editOther" style="display: none;">
+    <form action="/deleteUser" method="POST" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Eliminar usuario</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <input class="form-control" type="text" id="delName" name="deleteName" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="submit" class="botonregistro" value="Eliminar Palabra">
+            </div>
+        </div>
+    </form>
+    <form action="/deletePuntaje" method="POST" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Eliminar Puntaje</h2>
+            <label for="nombre">ID del usuario al cual le quiera eliminar el puntaje </label>
+            <input class="form-control" type="text" id="puntajeDelete" name="idPuntaje" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="submit" class="botonregistro" value="Eliminar Puntaje">
+            </div>
+        </div>
+    </form>
+</section>
 
