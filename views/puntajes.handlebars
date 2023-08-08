@@ -1,14 +1,15 @@
 <table>
     <tr>
-        <th style="width:30%">Nombre</th>
+        <th style="width:30%">id_usuario</th>
         <th style="width:30%">Username</th>
-        <th style="width:30%">DNI</th>
-        <th style="width:30%">Contraseña</th>
+        <th style="width:30%">Juegos ganados</th>
+        <th style="width:30%">Errores</th>
+        <th style="width:30%">Partidas jugadas</th>
     </tr>
     
         {{#each users}}
         <tr>
-            <td>{{this.name}}</td>
+            <td>{{this.id_usuario}}</td>
             <td>{{this.username}}</td>
             <td>{{this.dni}}</td>
             <td>{{this.password}}</td>
