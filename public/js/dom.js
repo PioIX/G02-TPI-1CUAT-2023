@@ -81,17 +81,19 @@ async function putJSON(data) {
 palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
 
 function chequearPalabra(){
+  let busqueda = palabra[0]
   for (i in palabra[0]){
     let caracter = document.getElementsByName("1")[i];
-    let busqueda = palabra[0]
-    if (busqueda[i]==caracter.value){
+    if (busqueda[i]==caracter.value.toLowerCase() ){
       caracter.style.backgroundColor = "#008000";
-        } 
-    else if (busqueda[i]!=caracter.value && (palabra[0].includes(caracter.value))){
+        }
+    else if (busqueda[i]!=caracter.value && palabra[0].includes(caracter.value) ){
       caracter.style.backgroundColor = "#f9e46e";
       }
-    else{
+    else if (caracter.value=="" || palabra[0].includes(caracter.value)==false){
       caracter.style.backgroundColor = "#9b9b9b";
     }
+    console.log(caracter.value)
     }
+    palabra[0] += palabra[0]
 }
