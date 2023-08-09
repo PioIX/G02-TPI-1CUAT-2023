@@ -1,15 +1,29 @@
+.container {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+}
+
 .header {
     width: 100%;
-    height: 56px;
+    height: 10vh;
     background-color: #00aae4;
     color: white;
     text-align: center;
     font-family: 'Belanosima', sans-serif;
+
 }
 
 * {
-    font-family: 'Belanosima', sans-serif;
+    font-family: 'Belanosima', sans-serif;  
 }
+
+
 
 .botonlogin {
     color: #fff;
