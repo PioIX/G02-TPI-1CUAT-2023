@@ -22,7 +22,7 @@
             <input class="form-control" type="text" id="newName2" name="wordName2" value="">
             <br>
             <div class="mb-3 form-check">
-                <input type="submit" class="botonregistro" value="Eliminar palabra">
+                <input type="button" onclick="deleteWord()"class="botonregistro" value="Eliminar palabra">
             </div>
         </div>
     </form>
@@ -37,7 +37,7 @@
             <input class="form-control" type="text" id="Def1" name="wordDef3" value="">
             <br>
             <div class="mb-3 form-check">
-                <input type="submit" class="botonregistro" value="Editar palabra">
+                <input type="button" onclick="editWord()" class="botonregistro" value="Editar palabra">
             </div>
         </div>
     </form>
@@ -46,11 +46,11 @@
     <form action="/deleteUser" method="DELETE" class="container-sm">
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar usuario</h2>
-            <label for="nombre">Nombre de la Palabra</label>
-            <input class="form-control" type="text" id="delName" name="deleteName" value="">
+            <label for="nombre">Nombre del usuario</label>
+            <input class="form-control" type="text" id="delUser" name="deleteName" value="">
             <br>
             <div class="mb-3 form-check">
-                <input type="submit" class="botonregistro" value="Eliminar Palabra">
+                <input type="button" onclick="deleteUser()" class="botonregistro" value="Eliminar Usuario">
             </div>
         </div>
     </form>

@@ -108,7 +108,7 @@ function chequearPalabra(){
     }
     }
 }
-async function putJSON2(dataAddWord) {
+async function postJSON(dataAddWord) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
 
   try {
@@ -149,6 +149,138 @@ function addWord() {
   }
 
   //data es el objeto que le paso al back
-  putJSON2(dataAddWord)
+  postJSON(dataAddWord)
 }
 
+async function deleteJSON(dataDeleteWord) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/deleteWord", {
+      method: "DELETE", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataDeleteWord),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      //Envio el formularia desde dom para cambiar de pagina
+      //Podria usar tambien un changeScreen()
+      alert("La palabra ha sido borrada exitosamente")
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function deleteWord() {
+  //Leo los datos del input
+  let word = document.getElementById("newName2").value
+  
+
+  //Creo un objeto de forma instantanea
+  let dataDeleteWord = {
+      wordNameDelete: word
+  }
+
+  //data es el objeto que le paso al back
+  deleteJSON(dataDeleteWord)
+}
+
+async function putJSON2(dataEditWord) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/editWord", {
+      method: "PUT", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataEditWord),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      //Envio el formularia desde dom para cambiar de pagina
+      //Podria usar tambien un changeScreen()
+      alert("La palabra ha sido editada exitosamente")
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function editWord() {
+  //Leo los datos del input
+  let word = document.getElementById("Name1").value
+  let newWord = document.getElementById("Name2").value
+  let newDef = document.getElementById("Def1").value
+  
+
+  //Creo un objeto de forma instantanea
+  let dataEditWord = {
+      preWord: word,
+      newPalabra: newWord,
+      newDefinition: newDef
+  }
+
+  //data es el objeto que le paso al back
+  putJSON2(dataEditWord)
+}
+
+async function deleteJSON2(dataDeleteUser) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/deleteUser", {
+      method: "DELETE", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataDeleteUser),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      //Envio el formularia desde dom para cambiar de pagina
+      //Podria usar tambien un changeScreen()
+      alert("El usuario ha sido borrada exitosamente")
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function deleteUser() {
+  //Leo los datos del input
+  let user = document.getElementById("delUser").value
+  
+
+  //Creo un objeto de forma instantanea
+  let dataDeleteUser = {
+      userNameDelete: user
+  }
+
+  //data es el objeto que le paso al back
+  deleteJSON2(dataDeleteUser)
+}

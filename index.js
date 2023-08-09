@@ -143,27 +143,55 @@ app.get('/puntajes',async function(req, res) {
 });
 
 app.post('/newWord',async function(req, res) {
-    await MySQL.realizarQuery(`INSERT INTO palabras (nombre_palabra, definicion_palabra) VALUES("${req.body.wordName}","${req.body.wordDefinition}")`)
-    let comprobacion = true
-    
-    res.send({validar: comprobacion});
+    let comprobacionTrue = true
+    let comprobacionFalse = false
+    if (req.body.wordName.length>0 && req.body.wordDefinition.length>0) {
+        await MySQL.realizarQuery(`INSERT INTO palabras (nombre_palabra, definicion_palabra) VALUES("${req.body.wordName}","${req.body.wordDefinition}")`)
+        res.send({validar: comprobacionTrue})
+    }
+    else {
+        res.send({validar: comprobacionFalse})
+    }
 })
 
 app.delete('/deleteWord',async function(req, res) {
-    await MySQL.realizarQuery(`DELETE FROM palabras WHERE nombre_palabra = "${req.body.wordName2}"`)
-    res.render('admin', null)
+    let comprobacionTrue = true
+    let comprobacionFalse = false
+    if (req.body.wordNameDelete.length > 0) {
+        await MySQL.realizarQuery(`DELETE FROM palabras WHERE nombre_palabra = "${req.body.wordNameDelete}"`)
+        res.send({validar: comprobacionTrue})
+    }
+    else { 
+        res.send({validar: comprobacionFalse}) 
+    }
 })
 app.put('/editWord',async function(req, res) {
-    await MySQL.realizarQuery(`UPDATE palabras SET nombre_palabra = "${req.body.wordName3}", definicion_palabra = "${req.body.wordDef3}" WHERE nombre_palabra = "${req.body.Name1}"`)
-    res.render('admin', null)
+    let comprobacionTrue = true
+    let comprobacionFalse = false
+    if (req.body.preWord.length>0) {
+        await MySQL.realizarQuery(`UPDATE palabras SET nombre_palabra = "${req.body.newPalabra}", definicion_palabra = "${req.body.newDefinition}" WHERE nombre_palabra = "${req.body.preWord}"`)
+        res.send({validar: comprobacionTrue})
+    }
+    else {
+        res.send({validar: comprobacionFalse})
+    }
 })
 
 app.delete('/deleteUser',async function(req, res) {
-    await MySQL.realizarQuery(`DELETE FROM usuarios WHERE nombre_usuario = "${req.body.deleteName}"`)
-    res.render('admin', null)
+    let comprobacionTrue = true
+    let comprobacionFalse = false
+    if (req.body.userNameDelete.lenght>0) {
+        await MySQL.realizarQuery(`DELETE FROM usuarios WHERE nombre_usuario = "${req.body.userNameDelete}"`)
+        res.send({validar: comprobacionTrue})
+    }
+    else {
+        res.send({validar: comprobacionFalse})
+    }
 })
 
 app.delete('/deletePuntaje',async function(req, res) {
+    let comprobacionTrue = true
+    let comprobacionFalse = false
     await MySQL.realizarQuery(`UPDATE puntajes SET puntuacion = ${0} WHERE id_usuarios = "${req.body.idPuntaje}"`)
     res.render('admin', null)
 })
