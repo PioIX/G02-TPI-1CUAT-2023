@@ -139,26 +139,32 @@ app.get('/table',async function(req, res) {
 
 app.get('/puntajes',async function(req, res) {
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuario");
-   res.render('puntajes', {users: usuarios});
+    res.render('puntajes', {users: usuarios});
 });
 
 app.post('/newWord',async function(req, res) {
     await MySQL.realizarQuery(`INSERT INTO palabras (nombre_palabra, definicion_palabra) VALUES("${req.body.wordName}","${req.body.wordDefinition}")`)
+    let comprobacion = true
+    
+    res.send({validar: comprobacion});
+})
+
+app.delete('/deleteWord',async function(req, res) {
+    await MySQL.realizarQuery(`DELETE FROM palabras WHERE nombre_palabra = "${req.body.wordName2}"`)
+    res.render('admin', null)
+})
+app.put('/editWord',async function(req, res) {
+    await MySQL.realizarQuery(`UPDATE palabras SET nombre_palabra = "${req.body.wordName3}", definicion_palabra = "${req.body.wordDef3}" WHERE nombre_palabra = "${req.body.Name1}"`)
     res.render('admin', null)
 })
 
-app.post('/deleteWord',async function(req, res) {
-    await MySQL.realizarQuery(`DELETE FROM palabras WHERE nombre_palabra = "${req.body.wordName2}"`)
-})
-app.post('/editWord',async function(req, res) {
-    await MySQL.realizarQuery(`UPDATE palabras SET nombre_palabra = "${req.body.wordName3}", definicion_palabra = "${req.body.wordDef3}" WHERE nombre_palabra = "${req.body.Name1}"`)
-})
-
-app.post('/deleteUser',async function(req, res) {
+app.delete('/deleteUser',async function(req, res) {
     await MySQL.realizarQuery(`DELETE FROM usuarios WHERE nombre_usuario = "${req.body.deleteName}"`)
+    res.render('admin', null)
 })
 
-app.post('/deletePuntaje',async function(req, res) {
+app.delete('/deletePuntaje',async function(req, res) {
     await MySQL.realizarQuery(`UPDATE puntajes SET puntuacion = ${0} WHERE id_usuarios = "${req.body.idPuntaje}"`)
+    res.render('admin', null)
 })
 

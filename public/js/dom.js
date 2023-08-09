@@ -108,3 +108,47 @@ function chequearPalabra(){
     }
     }
 }
+async function putJSON2(dataAddWord) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/newWord", {
+      method: "POST", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataAddWord),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      //Envio el formularia desde dom para cambiar de pagina
+      //Podria usar tambien un changeScreen()
+      alert("La palabra ha sido agregada exitosamente")
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+function addWord() {
+  //Leo los datos del input
+  let word = document.getElementById("newName").value
+  let definition = document.getElementById("newDefinition").value
+  
+
+  //Creo un objeto de forma instantanea
+  let dataAddWord = {
+      wordName: word,
+      wordDefinition: definition
+  }
+
+  //data es el objeto que le paso al back
+  putJSON2(dataAddWord)
+}
+

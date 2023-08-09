@@ -1,22 +1,7 @@
 <h2><center>Bienvenido a la pagina de administrador!</center></h2>
-<button class="form-check-control btn btn-info" onclick="changeScreenAdmin1()">Editar Palabras</button>
-<button class="form-check-control btn btn-info" onclick="">Otro</button>
+<center><button class="botonalternador" onclick="changeScreenAdmin1()">Alternar opciones</button></center>
+<br>
 <section id="editPalabra" style="display: none;">
-    <table>
-        <tr>
-            <th style="width:30%">ID palabra</th>
-            <th style="width:30%">Nombre de la palabra</th>
-            <th style="width:30%">Definicion de la palabra</th>
-        </tr>
-        
-            {{#each words}}
-            <tr>
-                <td>{{id_palabra}}</td>
-                <td>{{nombre_palabra}}</td>
-                <td>{{definicion_palabra}}</td>
-            </tr>
-            {{/each}}
-    </table>
     <form action="/newWord" method="POST" class="container-sm">
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Agregar Palabra</h2>
@@ -26,11 +11,11 @@
             <input class="form-control" type="text" id="newDefinition" name="wordDefinition" value="">
             <br>
             <div class="mb-3 form-check">
-                <input type="submit" class="botonregistro" value="Agregar Palabra">
+                <input type="button" onclick="addWord()" class="botonregistro" id="addWordId" value="Agregar Palabra">
             </div>
         </div>
     </form>
-    <form action="/deleteWord" method="POST" class="container-sm">
+    <form action="/deleteWord" method="DELETE" class="container-sm">
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
@@ -41,7 +26,7 @@
             </div>
         </div>
     </form>
-    <form action="/editWord" method="POST" class="container-sm">
+    <form action="/editWord" method="PUT" class="container-sm">
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Editar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
@@ -58,7 +43,7 @@
     </form>
 </section>
 <section id="editOther" style="display: none;">
-    <form action="/deleteUser" method="POST" class="container-sm">
+    <form action="/deleteUser" method="DELETE" class="container-sm">
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar usuario</h2>
             <label for="nombre">Nombre de la Palabra</label>
@@ -69,7 +54,7 @@
             </div>
         </div>
     </form>
-    <form action="/deletePuntaje" method="POST" class="container-sm">
+    <form action="/deletePuntaje" method="DELETE" class="container-sm">
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar Puntaje</h2>
             <label for="nombre">ID del usuario al cual le quiera eliminar el puntaje </label>
