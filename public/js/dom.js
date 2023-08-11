@@ -130,6 +130,11 @@ async function postJSON(dataAddWord) {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido agregada exitosamente")
+      let select = document.getElementById("delete1")
+      let edit = document.getElementById("edit1")
+      for (let child of select.children) {
+        child.append(dataAddWord.wordName)
+      }
     }
 
   } catch (error) {
@@ -175,10 +180,16 @@ async function deleteJSON(dataDeleteWord) {
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido borrada exitosamente")
       let select = document.getElementById("delete1")
+      let edit = document.getElementById("edit1")
       for(let child of select.children){
-        if(child.value == dataDeleteWord.wordNameDelete){
+        if (child.value == dataDeleteWord.wordNameDelete){
             child.remove()
         }
+      for (let child of edit.children) {
+        if (child.value == dataDeleteWord.wordNameDelete){
+          child.remove()
+        }
+      }
         
     }
     }
@@ -233,7 +244,7 @@ async function putJSON2(dataEditWord) {
 
 function editWord() {
   //Leo los datos del input
-  let word = document.getElementById("Name1").value
+  let word = document.getElementById("del2").value
   let newWord = document.getElementById("Name2").value
   let newDef = document.getElementById("Def1").value
   
@@ -270,7 +281,13 @@ async function deleteJSON2(dataDeleteUser) {
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
-      alert("El usuario ha sido borrada exitosamente")
+      alert("El usuario ha sido borrado exitosamente")
+      let select2 = document.getElementById("delete2")
+      for (let child of select2.children) {
+        if (child.value == dataDeleteUser.userNameDelete) {
+            child.remove()
+        }
+      }
     }
 
   } catch (error) {

@@ -55,7 +55,11 @@
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar usuario</h2>
             <label for="nombre">Nombre del usuario</label>
-            <input class="form-control" type="text" id="delUser" name="deleteName" value="">
+            <select id="delete2">
+                {{#each users}}
+                    <option value="{{this.nombre_usuario}}">{{this.nombre_usuario}}</option>
+                {{/each}}
+            </select>
             <br>
             <div class="mb-3 form-check">
                 <input type="button" onclick="deleteUser()" class="botonregistro" value="Eliminar Usuario">
