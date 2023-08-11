@@ -113,6 +113,14 @@ function chequearPalabra(){
     }
 }
 
+function invertirCadena() {
+  var nuevaCadena = "";
+  for (var i = palabra[0].length - 1; i >= 0; i--) {
+      nuevaCadena += palabra[0][i];
+  }
+  return nuevaCadena;
+}
+
 function comprobarVictoria(){
   
 }
