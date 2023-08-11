@@ -79,38 +79,48 @@ async function putJSON(data) {
   }
 
 palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
+let fila = 1
 
 function chequearPalabra(){
-  let palabraEscrita=""
   let busqueda = palabra[0]
+  
   for (var i = palabra[0].length - 1; i >=palabra[0].length - 7 ; i--){
     console.log(i)
-    palabraEscrita += i
-    let caracter = document.getElementsByName("1")[i];
+    let caracter = document.getElementsByName(fila)[i];
     caracter.style.backgroundColor = "#9b9b9b";
     if (busqueda[i]==caracter.value.toLowerCase() ){
       caracter.style.backgroundColor = "#008000";
-      busqueda = busqueda.slice(0,i) + "-1" + busqueda.slice(i+1,busqueda.length) 
+      busqueda = busqueda.slice(0,i) + "-" + busqueda.slice(i+1,busqueda.length) 
       console.log(busqueda)
       console.log(busqueda[i])
         }
   }
   console.log(busqueda)
   for (var i = palabra[0].length - 1; i >=palabra[0].length - 7 ; i--){
-    let caracter = document.getElementsByName("1")[i];
+    let caracter = document.getElementsByName(fila)[i];
     
-    if (caracter.value.length==0 ||busqueda.includes(caracter.value)==false){
+    if (caracter.value.length==0 ||busqueda.includes(caracter.value.toLowerCase())==false){
       caracter.style.backgroundColofr = "#9b9b9b";
         }
-    else if (busqueda[i]!=caracter.value && busqueda.includes(caracter.value)==true ){
+    else if (busqueda[i]!=caracter.value && busqueda.includes(caracter.value.toLowerCase())==true ){
       caracter.style.backgroundColor = "#f9e46e";
-      busqueda[i] = -1;
+      for (let j = 0; j < palabra[0].length; j++) {
+        if (caracter.value == busqueda[j]) {
+          busqueda = busqueda.slice(0,j) + "-" + busqueda.slice(j+1,busqueda.length)     
+          console.log(busqueda)
+          break;
         }
-    }
-    for (var x=0;x<7;x++){
+      }
+      
+      
+      //busqueda[i] = -1;
+        }
+    }console.log(busqueda)
+ /*   for (var x=0;x<7;x++){
       palabra[0] += palabra[0][x]
       console.log(palabra[0][x])
-    }
+    }*/
+    fila++;
 }
 
 function invertirCadena() {
