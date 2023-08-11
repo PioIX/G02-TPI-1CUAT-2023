@@ -125,6 +125,15 @@ app.put('/login', async function(req, res) {
     
     
 });
+app.put('/show', async function(req, res) {
+    //Petición DELETE con URL = "/login"
+    console.log("Soy un pedido DELETE", req.body); //En req.body vamos a obtener el objeto con los parámetros enviados desde el frontend por método DELETE
+    let usuarios = await MySQL.realizarQuery(`SELECT * FROM usuarios`)
+    let palabras = await MySQL.realizarQuery(`SELECT * FROM palabras`)
+    if (usuarios.length > 0 || palabras.length > 0) {
+        res.send({users: users, words: palabras})
+    }
+});
 
 app.delete('/login', function(req, res) {
     //Petición DELETE con URL = "/login"
@@ -180,7 +189,7 @@ app.put('/editWord',async function(req, res) {
 app.delete('/deleteUser',async function(req, res) {
     let comprobacionTrue = true
     let comprobacionFalse = false
-    if (req.body.userNameDelete.lenght>0) {
+    if (req.body.userNameDelete.length>0) {
         await MySQL.realizarQuery(`DELETE FROM usuarios WHERE nombre_usuario = "${req.body.userNameDelete}"`)
         res.send({validar: comprobacionTrue})
     }
@@ -192,7 +201,12 @@ app.delete('/deleteUser',async function(req, res) {
 app.delete('/deletePuntaje',async function(req, res) {
     let comprobacionTrue = true
     let comprobacionFalse = false
-    await MySQL.realizarQuery(`UPDATE puntajes SET puntuacion = ${0} WHERE id_usuarios = "${req.body.idPuntaje}"`)
-    res.render('admin', null)
+    if(req.body.idUserDelete.length>0) {
+        await MySQL.realizarQuery(`UPDATE puntajes SET puntuacion = ${0} WHERE id_usuarios = "${req.body.idUserDelete}"`)
+        res.send({validar: comprobacionTrue})
+    }
+    else {
+        res.send({validar: comprobacionFalse})
+    }
 })
 

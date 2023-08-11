@@ -19,7 +19,11 @@
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
-            <input class="form-control" type="text" id="newName2" name="wordName2" value="">
+            <select id="delete1">
+                    {{#each words}}
+                        <option value="{{this.nombre_palabra}}">{{this.nombre_palabra}}</option>
+                    {{/each}}
+            </select>
             <br>
             <div class="mb-3 form-check">
                 <input type="button" onclick="deleteWord()"class="botonregistro" value="Eliminar palabra">
@@ -30,7 +34,11 @@
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Editar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
-            <input class="form-control" type="text" id="Name1" name="Name1" value="">
+            <select id="edit1">
+                {{#each words}}
+                    <option value="{{this.nombre_palabra}}">{{this.nombre_palabra}}</option>
+                {{/each}}
+            </select>
             <label for="nuevonombre">Nuevo Nombre</label>
             <input class="form-control" type="text" id="Name2" name="wordName3" value="">
             <label for="definicionPalabra">Definicion de la palabra</label>
@@ -61,7 +69,7 @@
             <input class="form-control" type="text" id="puntajeDelete" name="idPuntaje" value="">
             <br>
             <div class="mb-3 form-check">
-                <input type="submit" class="botonregistro" value="Eliminar Puntaje">
+                <input type="button" onclick="deletePuntaje()" class="botonregistro" value="Eliminar Puntaje">
             </div>
         </div>
     </form>

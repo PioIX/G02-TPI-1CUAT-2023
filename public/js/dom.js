@@ -174,6 +174,13 @@ async function deleteJSON(dataDeleteWord) {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido borrada exitosamente")
+      let select = document.getElementById("delete1")
+      for(let child of select.children){
+        if(child.value == dataDeleteWord.wordNameDelete){
+            child.remove()
+        }
+        
+    }
     }
 
   } catch (error) {
@@ -183,7 +190,7 @@ async function deleteJSON(dataDeleteWord) {
 
 function deleteWord() {
   //Leo los datos del input
-  let word = document.getElementById("newName2").value
+  let word = document.getElementById("delete1").value
   
 
   //Creo un objeto de forma instantanea
@@ -283,4 +290,47 @@ function deleteUser() {
 
   //data es el objeto que le paso al back
   deleteJSON2(dataDeleteUser)
+}
+
+async function deleteJSON3(dataDeletePuntaje) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/deleteUser", {
+      method: "DELETE", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataDeletePuntaje),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      //Envio el formularia desde dom para cambiar de pagina
+      //Podria usar tambien un changeScreen()
+      alert("El puntaje ha sido borrada exitosamente")
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function deletePuntaje() {
+  //Leo los datos del input
+  let idDeleted = document.getElementById("puntajeDelete").value
+  
+
+  //Creo un objeto de forma instantanea
+  let dataDeletePuntaje = {
+      idUserDelete: idDeleted
+  }
+
+  //data es el objeto que le paso al back
+  deleteJSON3(dataDeletePuntaje)
 }
