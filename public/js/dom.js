@@ -132,9 +132,8 @@ async function postJSON(dataAddWord) {
       alert("La palabra ha sido agregada exitosamente")
       let select = document.getElementById("delete1")
       let edit = document.getElementById("edit1")
-      for (let child of select.children) {
-        child.append(dataAddWord.wordName)
-      }
+      select.appendChild(node)
+      edit.appendChild(node)
     }
 
   } catch (error) {
@@ -187,7 +186,7 @@ async function deleteJSON(dataDeleteWord) {
         }
       for (let child of edit.children) {
         if (child.value == dataDeleteWord.wordNameDelete){
-          child.remove()
+            child.remove()
         }
       }
         
@@ -297,7 +296,7 @@ async function deleteJSON2(dataDeleteUser) {
 
 function deleteUser() {
   //Leo los datos del input
-  let user = document.getElementById("delUser").value
+  let user = document.getElementById("delete2").value
   
 
   //Creo un objeto de forma instantanea
