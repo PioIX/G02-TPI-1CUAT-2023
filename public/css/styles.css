@@ -90,3 +90,19 @@
 #contenedor {
     width: 500px;
 }
+
+#reglas{
+    position: absolute;
+    top: 12%;
+    bottom: 0;
+    left: 5%;
+    right: 75%; 
+}
+
+#objetivo{
+    position: absolute;
+    top: 12%;
+    bottom: 0;
+    left: 75%;
+    right: 5%; 
+}
