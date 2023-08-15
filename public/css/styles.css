@@ -76,3 +76,12 @@
 #contenedor {
     width: 500px;
 }
+
+.boton_teclado {
+    height: 45px;
+    width: 40px;
+}
+
+#special_button {
+    width: 60px;
+}
