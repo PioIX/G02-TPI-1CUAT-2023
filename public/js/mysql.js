@@ -6,7 +6,7 @@ const mySql = require("mysql2/promise");
  */
 const SQL_CONFIGURATION_DATA =
 {
-	host: "10.1.5.205", //IP privada del servidor del colegio 10.1.5.205
+	host: "186.18.137.196", //IP privada del servidor del colegio 10.1.5.205
 	//host: "186.18.137.196", //IP pública del servidor del colegio
 	user: "2023_5INF_G02",
 	password: "chachi",
