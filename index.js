@@ -81,6 +81,7 @@ app.post('/login', async function(req, res)
      //Renderizo página "home" sin pasar ningún objeto a Handlebars
     let palabras = await MySQL.realizarQuery("SELECT * FROM palabras")
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
+    let puntajes = await MySQL.realizarQuery("SELECT * FROM puntajes")
     let verificar = 0
     for (i in usuarios) {
         if (usuarios[i].nombre_usuario == req.body.usuario) {
@@ -100,11 +101,11 @@ app.post('/login', async function(req, res)
     }
     else if(verificar == 1) {
         console.log("logeado lv user normal")
-        res.render('home', {users: usuarios, words: palabras})
+        res.render('home', {users: usuarios, words: palabras, points: puntajes})
     }
     else if (verificar == 2) {
         console.log("logeado admin")
-        res.render('admin', {users: usuarios, words: palabras})
+        res.render('admin', {users: usuarios, words: palabras, points: puntajes})
     }
 
     });
