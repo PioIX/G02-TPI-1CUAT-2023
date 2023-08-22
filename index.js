@@ -91,7 +91,7 @@ app.post('/login', async function(req, res)
     }
     res.render('login', null);
 });
-
+//bgdfgfd
 app.put('/login', function(req, res) {
     //Petición PUT con URL = "/login"
     console.log("Soy un pedido PUT", req.body); //En req.body vamos a obtener el objeto con los parámetros enviados desde el frontend por método PUT
