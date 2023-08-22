@@ -23,8 +23,6 @@
     font-family: 'Belanosima', sans-serif;  
 }
 
-
-
 .botonlogin {
     color: #fff;
     background-color: red;
@@ -98,4 +96,8 @@
 
 #special_button {
     width: 60px;
+}
+
+.teclas {
+    height: 30px;
 }

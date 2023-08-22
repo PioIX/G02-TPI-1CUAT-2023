@@ -78,59 +78,150 @@ async function putJSON(data) {
     putJSON(data)
   }
 
+/*let teclado = document.querySelector(".contenedor-teclado")
+const teclas = [
+  'Q',
+  'W',
+  'E',
+  'R',
+  'T',
+  'Y',
+  'U',
+  'I',
+  'O',
+  'P',
+  'A',
+  'S',
+  'D',
+  'F',
+  'G',
+  'H',
+  'J',
+  'K',
+  'L',
+  'Ñ',
+  'ENTER',
+  'Z',
+  'X',
+  'C',
+  'V',
+  'B',
+  'N',
+  'M',
+  'BORRAR',
+]
+
+for (i in teclas){
+  let buttonElement = document.createElement('button')
+  buttonElement.textContent = teclas[i]
+  document.getElementById("teclado_general").innerHTML +=  `
+    <button>asdasdasd</button>
+    `;
+}
+*/
+
+
 palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
+
+// CAMBIAR  "palabra[0]" a una palabra random de la base de datos
+
+// CAMBIAR "puntaje" al puntaje de algun usuario
+
 let fila = 1
+let vidas = 5
+let string =""
+let nuevaCadena=""
+puntaje = 0
+console.log(puntaje)
+
+function comprobarVictoria(){
+  if (nuevaCadena.toLowerCase() == string.toLowerCase()){
+    alert("Ganaste")
+    if (vidas == 5){
+      puntaje += 1000
+    }
+    else if (vidas == 4){
+      puntaje += 750
+    }
+    else if (vidas == 3){
+      puntaje += 500
+    }
+    else if (vidas == 2){
+      puntaje += 250
+    }
+    else if (vidas == 1){
+      puntaje += 100
+    }
+    return true
+  }
+  else {
+    vidas -=1;
+  }
+  if (vidas == 0){
+    puntaje -= 250
+    alert("Perdiste");
+    document.getElementById("boton_tabla").submit()
+    return false
+  }
+  //console.log("vidas =",vidas)
+}
 
 function chequearPalabra(){
+  string =""
+  nuevaCadena = ""
+  let palabra_real =""
+  for (i in palabra[0]){
+    string +=palabra[0][i]
+  }
   let busqueda = palabra[0]
-  
   for (var i = palabra[0].length - 1; i >=palabra[0].length - 7 ; i--){
-    console.log(i)
+    //console.log(i)
     let caracter = document.getElementsByName(fila)[i];
+    palabra_real +=document.getElementsByName(fila)[i].value;
     caracter.style.backgroundColor = "#9b9b9b";
     if (busqueda[i]==caracter.value.toLowerCase() ){
       caracter.style.backgroundColor = "#008000";
-      busqueda = busqueda.slice(0,i) + "-" + busqueda.slice(i+1,busqueda.length) 
-      console.log(busqueda)
-      console.log(busqueda[i])
+      busqueda = busqueda.slice(0,i) + "-" + busqueda.slice(i+1,busqueda.length)
+      //console.log(busqueda)
+      //console.log(busqueda[i])
+      //console.log("verde")
         }
   }
-  console.log(busqueda)
+  //console.log(busqueda)
   for (var i = palabra[0].length - 1; i >=palabra[0].length - 7 ; i--){
     let caracter = document.getElementsByName(fila)[i];
-    
+   
     if (caracter.value.length==0 ||busqueda.includes(caracter.value.toLowerCase())==false){
       caracter.style.backgroundColofr = "#9b9b9b";
         }
-    else if (busqueda[i]!=caracter.value && busqueda.includes(caracter.value.toLowerCase())==true ){
+    else if (busqueda[i]!=caracter.value && busqueda.includes(caracter.value.toLowerCase())==true && busqueda[i] != '-'){
       caracter.style.backgroundColor = "#f9e46e";
       for (let j = 0; j < palabra[0].length; j++) {
         if (caracter.value == busqueda[j]) {
-          busqueda = busqueda.slice(0,j) + "-" + busqueda.slice(j+1,busqueda.length)     
-          console.log(busqueda)
+          busqueda = busqueda.slice(0,j) + "?" + busqueda.slice(j+1,busqueda.length)    
+          //console.log(busqueda)
+          //console.log("amarillo")
           break;
         }
       }
-      
-      
-      //busqueda[i] = -1;
-        }
-    }console.log(busqueda)
- /*   for (var x=0;x<7;x++){
-      palabra[0] += palabra[0][x]
-      console.log(palabra[0][x])
-    }*/
-    fila++;
-}
-
-function invertirCadena() {
-  var nuevaCadena = "";
-  for (var i = palabra[0].length - 1; i >= 0; i--) {
-      nuevaCadena += palabra[0][i];
+    }
   }
-  return nuevaCadena;
+  //console.log(busqueda)
+
+  //console.log(string)
+    for (var i = palabra_real.length - 1; i >= 0; i--) {
+      nuevaCadena += palabra_real[i];
+    } 
+    //console.log(nuevaCadena)
+  fila++;
+  comprobarVictoria()
 }
 
-function comprobarVictoria(){
-  
+function presionar_tecla() {
+  enter = event.keyCode;
+  if (enter == 13 ) {
+    chequearPalabra()
+  }
 }
+
+window.onkeydown = presionar_tecla
