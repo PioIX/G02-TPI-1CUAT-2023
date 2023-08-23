@@ -132,7 +132,7 @@ let vidas = 5
 let string =""
 let nuevaCadena=""
 puntaje = 0
-console.log(puntaje)
+//console.log(puntaje)
 
 function comprobarVictoria(){
   if (nuevaCadena.toLowerCase() == string.toLowerCase()){
@@ -223,5 +223,11 @@ function presionar_tecla() {
     chequearPalabra()
   }
 }
-
 window.onkeydown = presionar_tecla
+
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+console.log(getRandomInt(palabra.length));
