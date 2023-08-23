@@ -223,4 +223,11 @@ app.get('/renAdmin',async function(req, res) {
     let palabras = await MySQL.realizarQuery("SELECT * FROM palabras")
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
     res.render('admin', {users: usuarios, words: palabras})
-})
+});
+
+app.post('/palabraRandom',async function(req, res) {
+    let palabra = await MySQL.realizarQuery(`SELECT nombre_palabra FROM palabras`)
+    let elementoRandom =  Math.floor(Math.random() * palabra.length)
+    let palabraAleatoria = palabra[elementoRandom]
+    res.send({randomWord : palabraAleatoria})
+});

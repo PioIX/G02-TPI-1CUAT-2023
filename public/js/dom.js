@@ -1,3 +1,34 @@
+palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
+
+palabraelegida = ""
+
+
+/*async function ran_palabra(data) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/palabraRandom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+    palabraelegida = result.
+
+  } 
+  
+    catch (error) {
+    console.error("Error:", error);
+  }
+}*/
+
+
+
 
 async function putJSON(data) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
@@ -42,7 +73,6 @@ function login() {
   putJSON(data)  
 }
 
-palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
 
 // CAMBIAR  "palabra[0]" a una palabra random de la base de datos
 
@@ -73,6 +103,11 @@ function comprobarVictoria(){
     else if (vidas == 1){
       puntaje += 100
     }
+    for (j = 1; 5; j++)
+      for (i in document.getElementsByName(j)){
+          cuadrado = document.getElementsByName(j)[i]
+          cuadrado.disabled = true;
+        }
     return true
   }
   else {
@@ -87,7 +122,20 @@ function comprobarVictoria(){
   //console.log("vidas =",vidas)
 }
 
+for (i in document.getElementsByName(fila)){
+    cuadrado = document.getElementsByName(fila)[i]
+    cuadrado.disabled = false;
+  }
+
 function chequearPalabra(){
+  for (i in document.getElementsByName(fila+1)){
+    cuadrado = document.getElementsByName(fila+1)[i]
+    cuadrado.disabled = false;
+  }
+  for (i in document.getElementsByName(fila)){
+    cuadrado = document.getElementsByName(fila)[i]
+    cuadrado.disabled = true;
+  }
   string =""
   nuevaCadena = ""
   let palabra_real =""
