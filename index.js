@@ -106,7 +106,8 @@ app.post('/login', async function(req, res)
     }
     else if (verificar == 2) {
         console.log("logeado admin")
-        res.render('admin', {users: usuarios, words: palabras})
+      //  res.render('admin', {users: usuarios, words: palabras})
+      res.redirect("/renAdmin")
     }
 
     });
@@ -203,6 +204,7 @@ app.delete('/deleteUser',async function(req, res) {
 app.delete('/deletePuntaje',async function(req, res) {
     let comprobacionTrue = true
     let comprobacionFalse = false
+    console.log(req.body.nameUserDelete)
     if(req.body.nameUserDelete.length>0) {
         await MySQL.realizarQuery(`UPDATE usuarios SET puntaje = ${0} WHERE nombre_usuario = "${req.body.nameUserDelete}"`)
         res.send({validar: comprobacionTrue})
@@ -226,15 +228,15 @@ app.get('/goToPoints',async function(req, res) {
     res.render('puntajes', {users: usuarios, words: palabras})  
 })
 
-app.get('/goAdmin',async function(req, res) {
+app.get('/renAdmin',async function(req, res) {
     let palabras = await MySQL.realizarQuery("SELECT * FROM palabras")
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
-    res.render('admin', {users: usuarios, words: palabras})  
-})
+    res.render('admin', {users: usuarios, words: palabras})
+});
 
 app.post('/palabraRandom',async function(req, res) {
     let palabra = await MySQL.realizarQuery(`SELECT nombre_palabra FROM palabras`)
     let elementoRandom =  Math.floor(Math.random() * palabra.length)
     let palabraAleatoria = palabra[elementoRandom]
     res.send({randomWord : palabraAleatoria})
-})
+});

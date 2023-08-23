@@ -319,7 +319,7 @@ async function postJSON(dataAddWord) {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido agregada exitosamente")
-      location.href = '/goAdmin'
+      location.href = '/renAdmin'
     }
 
   } catch (error) {
@@ -478,11 +478,10 @@ async function deleteJSON2(dataDeleteUser) {
       }
       for (let child of select3.children) {
         if (child.value == dataDeleteUser.userNameDelete) {
-           child.remove()
+            child.remove()
         }
       }
     }
-
   } catch (error) {
     console.error("Error:", error);
   }
@@ -523,7 +522,7 @@ async function deleteJSON3(dataDeletePuntaje) {
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
-      alert("El puntaje ha sido borrada exitosamente")
+      alert("El puntaje ha sido borrado exitosamente")
     }
 
   } catch (error) {
