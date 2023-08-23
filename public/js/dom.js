@@ -3,7 +3,7 @@ palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados"
 palabraelegida = ""
 
 
-/*async function ran_palabra(data) {
+async function conseguirPalabra() {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
 
   try {
@@ -12,20 +12,18 @@ palabraelegida = ""
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
     });
     
     //En result obtengo la respuesta
     const result = await response.json();
-    console.log("Success:", result);
-    palabraelegida = result.
-
-  } 
-  
+    palabraNueva = result
+    console.log(palabraNueva)
+    }
     catch (error) {
     console.error("Error:", error);
   }
-}*/
+  return palabraNueva
+}
 
 
 
@@ -90,15 +88,31 @@ function comprobarVictoria(){
     alert("Ganaste")
     if (vidas == 5){
       puntaje += 1000
+      for (i in document.getElementsByName(2)){
+        cuadrado = document.getElementsByName(2)[i]
+        cuadrado.disabled = false;
+      }
     }
     else if (vidas == 4){
       puntaje += 750
+      for (i in document.getElementsByName(3)){
+        cuadrado = document.getElementsByName(3)[i]
+        cuadrado.disabled = false;
+      }
     }
     else if (vidas == 3){
       puntaje += 500
+      for (i in document.getElementsByName(4)){
+        cuadrado = document.getElementsByName(4)[i]
+        cuadrado.disabled = false;
+      }
     }
     else if (vidas == 2){
       puntaje += 250
+      for (i in document.getElementsByName(5)){
+        cuadrado = document.getElementsByName(5)[i]
+        cuadrado.disabled = false;
+      }
     }
     else if (vidas == 1){
       puntaje += 100
