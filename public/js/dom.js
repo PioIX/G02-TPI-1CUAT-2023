@@ -221,10 +221,7 @@ async function postJSON(dataAddWord) {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido agregada exitosamente")
-      let select = document.getElementById("delete1")
-      let edit = document.getElementById("edit1")
-      select.appendChild(node)
-      edit.appendChild(node)
+      location.href = '/renAdmin'
     }
 
   } catch (error) {
@@ -374,13 +371,18 @@ async function deleteJSON2(dataDeleteUser) {
       //Podria usar tambien un changeScreen()
       alert("El usuario ha sido borrado exitosamente")
       let select2 = document.getElementById("delete2")
+      let select3 = document.getElementById("puntajeDelete")
       for (let child of select2.children) {
         if (child.value == dataDeleteUser.userNameDelete) {
             child.remove()
         }
       }
+      for (let child of select3.children) {
+        if (child.value == dataDeleteUser.userNameDelete) {
+            child.remove()
+        }
+      }
     }
-
   } catch (error) {
     console.error("Error:", error);
   }
@@ -404,7 +406,7 @@ async function deleteJSON3(dataDeletePuntaje) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
 
   try {
-    const response = await fetch("/deleteUser", {
+    const response = await fetch("/deletePuntaje", {
       method: "DELETE", // or 'POST'
       headers: {
         "Content-Type": "application/json",
@@ -421,7 +423,7 @@ async function deleteJSON3(dataDeletePuntaje) {
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
-      alert("El puntaje ha sido borrada exitosamente")
+      alert("El puntaje ha sido borrado exitosamente")
     }
 
   } catch (error) {
@@ -431,12 +433,12 @@ async function deleteJSON3(dataDeletePuntaje) {
 
 function deletePuntaje() {
   //Leo los datos del input
-  let idDeleted = document.getElementById("puntajeDelete").value
+  let nameDeleted = document.getElementById("puntajeDelete").value
   
 
   //Creo un objeto de forma instantanea
   let dataDeletePuntaje = {
-      idUserDelete: idDeleted
+      nameUserDelete: nameDeleted
   }
 
   //data es el objeto que le paso al back

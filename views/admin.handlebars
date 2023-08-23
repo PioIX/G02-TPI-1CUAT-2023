@@ -3,7 +3,7 @@
 <br>
 <section id="editPalabra" style="display: none;">
     <form action="/newWord" method="POST" class="container-sm">
-        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="col-auto shadow p-3 mb-5 bg-light rounded border border-secondary">
             <h2>Agregar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
             <input class="form-control" type="text" id="newName" name="wordName" value="">
@@ -16,7 +16,7 @@
         </div>
     </form>
     <form action="/deleteWord" method="DELETE" class="container-sm">
-        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="col-auto shadow p-3 mb-5 bg-light rounded border border-secondary">
             <h2>Eliminar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
             <select id="delete1">
@@ -31,7 +31,7 @@
         </div>
     </form>
     <form action="/editWord" method="PUT" class="container-sm">
-        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="col-auto shadow p-3 mb-5 bg-light rounded border border-secondary">
             <h2>Editar Palabra</h2>
             <label for="nombre">Nombre de la Palabra</label>
             <select id="edit1">
@@ -53,7 +53,7 @@
 </section>
 <section id="editOther" style="display: none;">
     <form action="/deleteUser" method="DELETE" class="container-sm">
-        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="col-auto shadow p-3 mb-5 bg-light rounded border border-secondary">
             <h2>Eliminar usuario</h2>
             <label for="nombre">Nombre del usuario</label>
             <select id="delete2">
@@ -68,10 +68,14 @@
         </div>
     </form>
     <form action="/deletePuntaje" method="DELETE" class="container-sm">
-        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+        <div class="col-auto shadow p-3 mb-5 bg-light rounded border border-secondary">
             <h2>Eliminar Puntaje</h2>
             <label for="nombre">ID del usuario al cual le quiera eliminar el puntaje </label>
-            <input class="form-control" type="text" id="puntajeDelete" name="idPuntaje" value="">
+            <select id="puntajeDelete">
+                {{#each users}}
+                    <option value="{{this.nombre_usuario}}">{{this.nombre_usuario}}</option>
+                {{/each}}
+            </select>
             <br>
             <div class="mb-3 form-check">
                 <input type="button" onclick="deletePuntaje()" class="botonregistro" value="Eliminar Puntaje">
