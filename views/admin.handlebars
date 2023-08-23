@@ -1,7 +1,82 @@
-<h2><center>Bienvenido a la pagina de administrador! {{usuario}}</center></h2>
-<form action="/edit" method="GET" class="container-sm">
-    <div class="mb-3 form-check">
-        <input type="submit" class="btn btn-primary" value="Tabla">
-    </div>
-</form>
+<h2><center>Bienvenido a la pagina de administrador!</center></h2>
+<center><button class="botonalternador" onclick="changeScreenAdmin1()">Alternar opciones</button></center>
+<br>
+<section id="editPalabra" style="display: none;">
+    <form action="/newWord" method="POST" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Agregar Palabra</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <input class="form-control" type="text" id="newName" name="wordName" value="">
+            <label for="definicion">Definicion de la Palabra</label>
+            <input class="form-control" type="text" id="newDefinition" name="wordDefinition" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="button" onclick="addWord()" class="botonregistro" id="addWordId" value="Agregar Palabra">
+            </div>
+        </div>
+    </form>
+    <form action="/deleteWord" method="DELETE" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Eliminar Palabra</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <select id="delete1">
+                    {{#each words}}
+                        <option value="{{this.nombre_palabra}}">{{this.nombre_palabra}}</option>
+                    {{/each}}
+            </select>
+            <br>
+            <div class="mb-3 form-check">
+                <input type="button" onclick="deleteWord()"class="botonregistro" value="Eliminar palabra">
+            </div>
+        </div>
+    </form>
+    <form action="/editWord" method="PUT" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Editar Palabra</h2>
+            <label for="nombre">Nombre de la Palabra</label>
+            <select id="edit1">
+                {{#each words}}
+                    <option value="{{this.nombre_palabra}}">{{this.nombre_palabra}}</option>
+                {{/each}}
+            </select>
+            <br>
+            <label for="nuevonombre">Nuevo Nombre</label>
+            <input class="form-control" type="text" id="Name2" name="wordName3" value="">
+            <label for="definicionPalabra">Definicion de la palabra</label>
+            <input class="form-control" type="text" id="Def1" name="wordDef3" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="button" onclick="editWord()" class="botonregistro" value="Editar palabra">
+            </div>
+        </div>
+    </form>
+</section>
+<section id="editOther" style="display: none;">
+    <form action="/deleteUser" method="DELETE" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Eliminar usuario</h2>
+            <label for="nombre">Nombre del usuario</label>
+            <select id="delete2">
+                {{#each users}}
+                    <option value="{{this.nombre_usuario}}">{{this.nombre_usuario}}</option>
+                {{/each}}
+            </select>
+            <br>
+            <div class="mb-3 form-check">
+                <input type="button" onclick="deleteUser()" class="botonregistro" value="Eliminar Usuario">
+            </div>
+        </div>
+    </form>
+    <form action="/deletePuntaje" method="DELETE" class="container-sm">
+        <div class="col-auto shadow p-3 mb-5 bg-white rounded">
+            <h2>Eliminar Puntaje</h2>
+            <label for="nombre">ID del usuario al cual le quiera eliminar el puntaje </label>
+            <input class="form-control" type="text" id="puntajeDelete" name="idPuntaje" value="">
+            <br>
+            <div class="mb-3 form-check">
+                <input type="button" onclick="deletePuntaje()" class="botonregistro" value="Eliminar Puntaje">
+            </div>
+        </div>
+    </form>
+</section>
 

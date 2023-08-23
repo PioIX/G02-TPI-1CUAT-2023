@@ -33,4 +33,8 @@ Insert into palabras (id_palabra, nombre_palabra) values (10,"estados");
 Insert into palabras (id_palabra, nombre_palabra) values (11,"derechos");
 Insert into palabras (id_palabra, nombre_palabra) values (12,"sanidad");
 Insert into palabras (id_palabra, nombre_palabra) values (13,"jovenes");
-
+Insert into palabras (id_palabra, nombre_palabra) values (14,"equidad");
+Insert into palabras (id_palabra, nombre_palabra) values (15,"impacto");
+Insert into palabras (id_palabra, nombre_palabra) values (16,"jovenes");
+Insert into palabras (id_palabra, nombre_palabra) values (17,"riqueza");
+Insert into palabras (id_palabra, nombre_palabra) values (18,"caridad");

@@ -7,12 +7,10 @@
         <th style="width:30%">Partidas jugadas</th>
     </tr>
     
-        {{#each users}}
+        {{#each points}}
         <tr>
-            <td>{{this.id_usuario}}</td>
-            <td>{{this.username}}</td>
-            <td>{{this.dni}}</td>
-            <td>{{this.password}}</td>
+            <td>{{this.puntuacion}}</td>
+            <td>{{this.id_usuarios}}</td>
         </tr>
         {{/each}}
 </table>
