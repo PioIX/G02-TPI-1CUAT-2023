@@ -388,3 +388,42 @@ function deletePuntaje() {
   //data es el objeto que le paso al back
   deleteJSON3(dataDeletePuntaje)
 }
+
+async function putPoints(data5) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/addPoints", {
+      method: "PUT", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data5),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      location.href= '/goToPoints'
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function showPoints() {
+  //Leo los datos del input}
+  let caca = puntaje
+  //Creo un objeto de forma instantanea
+  let data5 = {
+      points: caca
+  }
+
+  //data es el objeto que le paso al back
+  putPoints(data5)
+}

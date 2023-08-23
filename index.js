@@ -210,4 +210,10 @@ app.delete('/deletePuntaje',async function(req, res) {
         res.send({validar: comprobacionFalse})
     }
 })
+app.put('/sumaPoints',async function(req, res) {
+    
+})
 
+app.get('/goToPoints',async function(req, res) {
+    res.render('puntajes', null)  
+})
