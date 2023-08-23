@@ -42,7 +42,7 @@ app.listen(Listen_Port, function() {
     A PARTIR DE ESTE PUNTO GENERAREMOS NUESTRO CÓDIGO (PARA RECIBIR PETICIONES, MANEJO DB, ETC.)
     A PARTIR DE ESTE PUNTO GENERAREMOS NUESTRO CÓDIGO (PARA RECIBIR PETICIONES, MANEJO DB, ETC.)
 */
-
+id_logeado = -1
 app.get('/', function(req, res)
 {
     //Petición GET con URL = "/", lease, página principal.
@@ -67,7 +67,7 @@ app.post('/register', async function(req, res)
 {
     console.log("Soy un pedido POST", req.body)
     
-    await MySQL.realizarQuery(`INSERT INTO usuarios (dni,nombre_usuario, nombre_completo, contraseña_usuario, usuario_admin) VALUES("${req.body.dni}","${req.body.Usuario}", "${req.body.Name}", "${req.body.Contraseña}", ${false})`)
+    await MySQL.realizarQuery(`INSERT INTO usuarios (dni,nombre_usuario, nombre_completo, contraseña_usuario, usuario_admin, puntaje) VALUES("${req.body.dni}","${req.body.Usuario}", "${req.body.Name}", "${req.body.Contraseña}", ${false}, ${0})`)
     
     res.render('home', {usuario: req.body.Usuario})
 }
@@ -81,14 +81,15 @@ app.post('/login', async function(req, res)
      //Renderizo página "home" sin pasar ningún objeto a Handlebars
     let palabras = await MySQL.realizarQuery("SELECT * FROM palabras")
     let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
-    let puntajes = await MySQL.realizarQuery("SELECT * FROM puntajes")
     let verificar = 0
     for (i in usuarios) {
         if (usuarios[i].nombre_usuario == req.body.usuario) {
             if (usuarios[i].contraseña_usuario == req.body.contraseña) {
                 verificar = 1
+                usuarios[i].id_usuario = id_logeado
                 if (usuarios[i].usuario_admin == true) {
                     verificar = 2
+                    usuarios[i].id_usuario = id_logeado
                 }
             }
         }
@@ -101,11 +102,11 @@ app.post('/login', async function(req, res)
     }
     else if(verificar == 1) {
         console.log("logeado lv user normal")
-        res.render('home', {users: usuarios, words: palabras, points: puntajes})
+        res.render('home', {users: usuarios, words: palabras})
     }
     else if (verificar == 2) {
         console.log("logeado admin")
-        res.render('admin', {users: usuarios, words: palabras, points: puntajes})
+        res.render('admin', {users: usuarios, words: palabras})
     }
 
     });
@@ -148,7 +149,7 @@ app.get('/table',async function(req, res) {
 });
 
 app.get('/puntajes',async function(req, res) {
-    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuario");
+    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios");
     res.render('puntajes', {users: usuarios});
 });
 
@@ -202,8 +203,8 @@ app.delete('/deleteUser',async function(req, res) {
 app.delete('/deletePuntaje',async function(req, res) {
     let comprobacionTrue = true
     let comprobacionFalse = false
-    if(req.body.idUserDelete.length>0) {
-        await MySQL.realizarQuery(`UPDATE puntajes SET puntuacion = ${0} WHERE id_usuarios = "${req.body.idUserDelete}"`)
+    if(req.body.nameUserDelete.length>0) {
+        await MySQL.realizarQuery(`UPDATE usuarios SET puntaje = ${0} WHERE nombre_usuario = "${req.body.nameUserDelete}"`)
         res.send({validar: comprobacionTrue})
     }
     else {
@@ -211,13 +212,25 @@ app.delete('/deletePuntaje',async function(req, res) {
     }
 })
 app.put('/sumaPoints',async function(req, res) {
-    
+    let usuarios = await MySQL.realizarQuery(`SELECT * FROM usuarios`)
+    let inicial = await MySQL.realizarQuery(`SELECT puntaje FROM usuarios WHERE id_usuario = "${id_logeado}"`)
+    let sumaPuntos = inicial + req.body.Points
+    for(let i in usuarios) {
+        if (usuarios[i].id_usuario = id_logeado) {
+            await MySQL.realizarQuery(`UPDATE usuarios SET puntaje = ${sumaPuntos} WHERE nombre_usuario = "${req.body.nameUserDelete}"`)
+        }
+    }
 })
 
 app.get('/goToPoints',async function(req, res) {
-    res.render('puntajes', null)  
+    res.render('puntajes', {users: usuarios, words: palabras})  
 })
 
+app.get('/goAdmin',async function(req, res) {
+    let palabras = await MySQL.realizarQuery("SELECT * FROM palabras")
+    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios")
+    res.render('admin', {users: usuarios, words: palabras})  
+})
 
 app.post('/palabraRandom',async function(req, res) {
     let palabra = await MySQL.realizarQuery(`SELECT nombre_palabra FROM palabras`)

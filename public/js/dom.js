@@ -1,7 +1,51 @@
+
+
+
 palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
 
 palabraelegida = ""
 
+async function showPoints(dataPoints) {
+  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
+
+  try {
+    const response = await fetch("/sumaPoints", {
+      method: "PUT", // or 'POST'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataPoints),
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    console.log("Success:", result);
+
+    if (result.validar == false) {
+      alert("El campo esta vacio o no se")
+    } else {
+      //Envio el formularia desde dom para cambiar de pagina
+      //Podria usar tambien un changeScreen()
+      alert("La palabra ha sido agregada exitosamente")
+      location.href = '/goToPoints'
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function passPoints() {
+  //Leo los datos del input
+  let newPoints = puntaje
+  //Creo un objeto de forma instantanea
+  let dataPoints = {
+      Points: newPoints
+  }
+
+  //data es el objeto que le paso al back
+  postJSON(dataPoints)
+}
 
 /*async function ran_palabra(data) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
@@ -27,7 +71,53 @@ palabraelegida = ""
   }
 }*/
 
+function getUser() {
+  return document.getElementById("usuarioId").value;
+}
 
+
+function getPassword() {
+  return document.getElementById("passwordId").value;
+}
+
+function getDni() {
+  return document.getElementById("dni").value;
+}
+
+function getFullName() {
+  return document.getElementById("nameId").value;
+}
+
+function changeScreenAdmin1() {
+const firstSec = document.getElementById("editPalabra");
+const secondSec = document.getElementById("editOther");
+if (firstSec.style.display !== "none") {
+  firstSec.style.display = "none";
+  secondSec.style.display = "";
+}
+else {
+  firstSec.style.display = "";
+  secondSec.style.display = "none";
+}
+
+}
+
+function changeScreen() {
+  const notepad = document.getElementById("notepad");
+  const login = document.getElementById("login");
+  if(notepad.style.display !== "none") {
+      notepad.style.display = "none";
+      login.style.display = "";
+  }
+  else {
+      notepad.style.display = "";
+      login.style.display = "none";
+  }
+}
+
+function getSearchID() {
+  return document.getElementById("searchByID").value;
+}
 
 
 async function putJSON(data) {
@@ -90,18 +180,23 @@ function comprobarVictoria(){
     alert("Ganaste")
     if (vidas == 5){
       puntaje += 1000
+      passPoints(puntaje)
     }
     else if (vidas == 4){
       puntaje += 750
+      passPoints(puntaje)
     }
     else if (vidas == 3){
       puntaje += 500
+      passPoints(puntaje)
     }
     else if (vidas == 2){
       puntaje += 250
+      passPoints(puntaje)
     }
     else if (vidas == 1){
       puntaje += 100
+      passPoints(puntaje)
     }
     for (j = 1; 5; j++)
       for (i in document.getElementsByName(j)){
@@ -109,6 +204,8 @@ function comprobarVictoria(){
           cuadrado.disabled = true;
         }
     return true
+
+
   }
   else {
     vidas -=1;
@@ -222,10 +319,7 @@ async function postJSON(dataAddWord) {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido agregada exitosamente")
-      let select = document.getElementById("delete1")
-      let edit = document.getElementById("edit1")
-      select.appendChild(node)
-      edit.appendChild(node)
+      location.href = '/goAdmin'
     }
 
   } catch (error) {
@@ -327,6 +421,7 @@ async function putJSON2(dataEditWord) {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido editada exitosamente")
+      location.href = '/goAdmin'
     }
 
   } catch (error) {
@@ -336,7 +431,7 @@ async function putJSON2(dataEditWord) {
 
 function editWord() {
   //Leo los datos del input
-  let word = document.getElementById("del2").value
+  let word = document.getElementById("edit1").value
   let newWord = document.getElementById("Name2").value
   let newDef = document.getElementById("Def1").value
   
@@ -375,9 +470,15 @@ async function deleteJSON2(dataDeleteUser) {
       //Podria usar tambien un changeScreen()
       alert("El usuario ha sido borrado exitosamente")
       let select2 = document.getElementById("delete2")
+      let select3 = document.getElementById("puntajeDelete")
       for (let child of select2.children) {
         if (child.value == dataDeleteUser.userNameDelete) {
             child.remove()
+        }
+      }
+      for (let child of select3.children) {
+        if (child.value == dataDeleteUser.userNameDelete) {
+           child.remove()
         }
       }
     }
@@ -405,7 +506,7 @@ async function deleteJSON3(dataDeletePuntaje) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
 
   try {
-    const response = await fetch("/deleteUser", {
+    const response = await fetch("/deletePuntaje", {
       method: "DELETE", // or 'POST'
       headers: {
         "Content-Type": "application/json",
@@ -432,12 +533,12 @@ async function deleteJSON3(dataDeletePuntaje) {
 
 function deletePuntaje() {
   //Leo los datos del input
-  let idDeleted = document.getElementById("puntajeDelete").value
+  let nameDeleted = document.getElementById("puntajeDelete").value
   
 
   //Creo un objeto de forma instantanea
   let dataDeletePuntaje = {
-      idUserDelete: idDeleted
+      nameUserDelete: nameDeleted
   }
 
   //data es el objeto que le paso al back

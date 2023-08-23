@@ -71,7 +71,11 @@
         <div class="col-auto shadow p-3 mb-5 bg-white rounded">
             <h2>Eliminar Puntaje</h2>
             <label for="nombre">ID del usuario al cual le quiera eliminar el puntaje </label>
-            <input class="form-control" type="text" id="puntajeDelete" name="idPuntaje" value="">
+            <select id="puntajeDelete">
+                {{#each users}}
+                    <option value="{{this.nombre_usuario}}">{{this.nombre_usuario}}</option>
+                {{/each}}
+            </select>
             <br>
             <div class="mb-3 form-check">
                 <input type="button" onclick="deletePuntaje()" class="botonregistro" value="Eliminar Puntaje">

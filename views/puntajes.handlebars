@@ -1,16 +1,10 @@
-<table>
-    <tr>
-        <th style="width:30%">id_usuario</th>
-        <th style="width:30%">Username</th>
-        <th style="width:30%">Juegos ganados</th>
-        <th style="width:30%">Errores</th>
-        <th style="width:30%">Partidas jugadas</th>
-    </tr>
-    
-        {{#each points}}
-        <tr>
-            <td>{{this.puntuacion}}</td>
-            <td>{{this.id_usuarios}}</td>
-        </tr>
+<main>
+    <table>
+        {{#each users}}
+            <tr>
+                <td>{{this.nombre_usuario}}</td>
+                <td>{{this.puntaje}}</td>
+            </tr>
         {{/each}}
-</table>
+    </table>
+</main>
