@@ -217,3 +217,11 @@ app.put('/sumaPoints',async function(req, res) {
 app.get('/goToPoints',async function(req, res) {
     res.render('puntajes', null)  
 })
+
+
+app.post('/palabraRandom',async function(req, res) {
+    let palabra = await MySQL.realizarQuery(`SELECT nombre_palabra FROM palabras`)
+    let elementoRandom =  Math.floor(Math.random() * palabra.length)
+    let palabraAleatoria = palabra[elementoRandom]
+    res.send({randomWord : palabraAleatoria})
+})
