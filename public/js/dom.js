@@ -37,8 +37,9 @@ function login() {
   //Creo un objeto de forma instantanea
   let data = {
       user: usuario,
-      pass: contraseña
+      pass: contraseña  
   }
+  putJSON(data)  
 }
 
 palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
