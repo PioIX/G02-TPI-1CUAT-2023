@@ -39,6 +39,7 @@ function login() {
       user: usuario,
       pass: contraseña
   }
+}
 
 palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
 
@@ -149,8 +150,7 @@ function getRandomInt(max) {
 }
 
 console.log(getRandomInt(palabra.length));
-=======
-  
+
 async function postJSON(dataAddWord) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
 
@@ -183,6 +183,7 @@ async function postJSON(dataAddWord) {
     console.error("Error:", error);
   }
 }
+
 function addWord() {
   //Leo los datos del input
   let word = document.getElementById("newName").value
@@ -393,3 +394,4 @@ function deletePuntaje() {
   //data es el objeto que le paso al back
   deleteJSON3(dataDeletePuntaje)
 }
+
