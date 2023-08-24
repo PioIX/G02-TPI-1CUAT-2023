@@ -1,11 +1,9 @@
-palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
+palabra = ["sanidad","sanidad","consumo","alianza","energia","derecho","estados","residuo"];
 
 palabraelegida = ""
 
-
 async function conseguirPalabra() {
-  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
-
+  
   try {
     const response = await fetch("/palabraRandom", {
       method: "POST",
@@ -16,14 +14,13 @@ async function conseguirPalabra() {
     
     //En result obtengo la respuesta
     const result = await response.json();
-    palabraElegida= result
+    palabraNueva = result 
     console.log(palabraNueva)
-    }
-    catch (error) {
+  } catch (error) {
     console.error("Error:", error);
   }
-  return palabraElegida
 }
+
 
 
 async function putJSON(data) {
@@ -83,7 +80,6 @@ puntaje = 0
 
 function comprobarVictoria(){
   if (nuevaCadena.toLowerCase() == string.toLowerCase()){
-    alert("Ganaste")
     if (vidas == 5){
       puntaje += 1000
       for (i in document.getElementsByName(2)){
@@ -126,7 +122,6 @@ function comprobarVictoria(){
     vidas -=1;
   }
   if (vidas == 0){
-    puntaje -= 250
     alert("Perdiste");
     document.getElementById("boton_tabla").submit()
     return false
@@ -206,11 +201,6 @@ function presionar_tecla() {
 }
 window.onkeydown = presionar_tecla
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
-console.log(getRandomInt(palabra.length));
 
 async function postJSON(dataAddWord) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
