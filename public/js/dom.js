@@ -5,6 +5,24 @@ palabra = ["jovenes","sanidad","consumo","alianza","energia","derecho","estados"
 
 palabraelegida = ""
 
+async function conseguirPalabra() {
+  try {
+    const response = await fetch("/palabraRandom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    //En result obtengo la respuesta
+    const result = await response.json();
+    palabraelegida = result.randomWord.nombre_palabra
+    console.log(palabraelegida)
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 async function showPoints(dataPoints) {
   //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
 
@@ -228,11 +246,11 @@ function chequearPalabra(){
   string =""
   nuevaCadena = ""
   let palabra_real =""
-  for (i in palabra[0]){
-    string +=palabra[0][i]
+  for (i in palabraelegida){
+    string +=palabraelegida[i]
   }
-  let busqueda = palabra[0]
-  for (var i = palabra[0].length - 1; i >=palabra[0].length - 7 ; i--){
+  let busqueda = palabraelegida
+  for (var i = palabraelegida.length - 1; i >=palabraelegida.length - 7 ; i--){
     //console.log(i)
     let caracter = document.getElementsByName(fila)[i];
     palabra_real +=document.getElementsByName(fila)[i].value;
@@ -246,7 +264,7 @@ function chequearPalabra(){
         }
   }
   //console.log(busqueda)
-  for (var i = palabra[0].length - 1; i >=palabra[0].length - 7 ; i--){
+  for (var i = palabraelegida.length - 1; i >=palabraelegida.length - 7 ; i--){
     let caracter = document.getElementsByName(fila)[i];
    
     if (caracter.value.length==0 ||busqueda.includes(caracter.value.toLowerCase())==false){
@@ -254,7 +272,7 @@ function chequearPalabra(){
         }
     else if (busqueda[i]!=caracter.value && busqueda.includes(caracter.value.toLowerCase())==true && busqueda[i] != '-'){
       caracter.style.backgroundColor = "#f9e46e";
-      for (let j = 0; j < palabra[0].length; j++) {
+      for (let j = 0; j < palabraelegida.length; j++) {
         if (caracter.value == busqueda[j]) {
           busqueda = busqueda.slice(0,j) + "?" + busqueda.slice(j+1,busqueda.length)    
           //console.log(busqueda)
@@ -273,6 +291,7 @@ function chequearPalabra(){
     //console.log(nuevaCadena)
   fila++;
   comprobarVictoria()
+  console.log(palabra_real)
 }
 
 function presionar_tecla() {
