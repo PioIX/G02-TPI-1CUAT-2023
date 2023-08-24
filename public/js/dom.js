@@ -16,16 +16,14 @@ async function conseguirPalabra() {
     
     //En result obtengo la respuesta
     const result = await response.json();
-    palabraNueva = result
+    palabraElegida= result
     console.log(palabraNueva)
     }
     catch (error) {
     console.error("Error:", error);
   }
-  return palabraNueva
+  return palabraElegida
 }
-
-
 
 
 async function putJSON(data) {
