@@ -22,12 +22,12 @@ async function showPoints(dataPoints) {
     console.log("Success:", result);
 
     if (result.validar == false) {
-      alert("El campo esta vacio o no se")
+      alert("")
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
-      alert("La palabra ha sido agregada exitosamente")
       location.href = '/goToPoints'
+      alert("Felicidades!, has ganado")
     }
 
   } catch (error) {
@@ -35,16 +35,15 @@ async function showPoints(dataPoints) {
   }
 }
 
-function passPoints() {
+function passPoints(puntaje) {
   //Leo los datos del input
   let newPoints = puntaje
   //Creo un objeto de forma instantanea
   let dataPoints = {
       Points: newPoints
   }
-
   //data es el objeto que le paso al back
-  postJSON(dataPoints)
+  showPoints(dataPoints)
 }
 
 /*async function ran_palabra(data) {
@@ -177,7 +176,6 @@ puntaje = 0
 
 function comprobarVictoria(){
   if (nuevaCadena.toLowerCase() == string.toLowerCase()){
-    alert("Ganaste")
     if (vidas == 5){
       puntaje += 1000
       passPoints(puntaje)
@@ -198,11 +196,6 @@ function comprobarVictoria(){
       puntaje += 100
       passPoints(puntaje)
     }
-    for (j = 1; 5; j++)
-      for (i in document.getElementsByName(j)){
-          cuadrado = document.getElementsByName(j)[i]
-          cuadrado.disabled = true;
-        }
     return true
 
 
@@ -211,9 +204,8 @@ function comprobarVictoria(){
     vidas -=1;
   }
   if (vidas == 0){
-    puntaje -= 250
     alert("Perdiste");
-    document.getElementById("boton_tabla").submit()
+    location.href = '/goToPoints'
     return false
   }
   //console.log("vidas =",vidas)
@@ -314,7 +306,7 @@ async function postJSON(dataAddWord) {
     console.log("Success:", result);
 
     if (result.validar == false) {
-      alert("El campo esta vacio o no se")
+      alert("")
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
@@ -360,7 +352,7 @@ async function deleteJSON(dataDeleteWord) {
     console.log("Success:", result);
 
     if (result.validar == false) {
-      alert("El campo esta vacio o no se")
+      alert("")
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
@@ -416,12 +408,12 @@ async function putJSON2(dataEditWord) {
     console.log("Success:", result);
 
     if (result.validar == false) {
-      alert("El campo esta vacio o no se")
+      alert("")
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
       alert("La palabra ha sido editada exitosamente")
-      location.href = '/goAdmin'
+      location.href = '/renAdmin'
     }
 
   } catch (error) {
@@ -464,7 +456,7 @@ async function deleteJSON2(dataDeleteUser) {
     console.log("Success:", result);
 
     if (result.validar == false) {
-      alert("El campo esta vacio o no se")
+      alert("")
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
@@ -518,7 +510,7 @@ async function deleteJSON3(dataDeletePuntaje) {
     console.log("Success:", result);
 
     if (result.validar == false) {
-      alert("El campo esta vacio o no se")
+      alert("")
     } else {
       //Envio el formularia desde dom para cambiar de pagina
       //Podria usar tambien un changeScreen()
@@ -544,41 +536,3 @@ function deletePuntaje() {
   deleteJSON3(dataDeletePuntaje)
 }
 
-async function putPoints(data5) {
-  //putJSON() es solo el nombre de esta funcion que lo pueden cambiar    
-
-  try {
-    const response = await fetch("/addPoints", {
-      method: "PUT", // or 'POST'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data5),
-    });
-    
-    //En result obtengo la respuesta
-    const result = await response.json();
-    console.log("Success:", result);
-
-    if (result.validar == false) {
-      alert("El campo esta vacio o no se")
-    } else {
-      location.href= '/goToPoints'
-    }
-
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-
-function showPoints() {
-  //Leo los datos del input}
-  let caca = puntaje
-  //Creo un objeto de forma instantanea
-  let data5 = {
-      points: caca
-  }
-
-  //data es el objeto que le paso al back
-  putPoints(data5)
-}

@@ -1,5 +1,40 @@
 <main>
-    <table>
+    <style>
+        table{
+            background-color: #bbedf7;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td{
+	        padding: 20px;
+        }
+
+        thead{
+	        background-color: #003a55;
+	        border-bottom: solid 5px #01ddff;
+	        color: white;
+        }
+
+        tr:nth-child(even){
+	        background-color: #01ddff;
+        }
+        
+        #main-container{
+	        margin: 50px auto;
+	        width: 600px;
+        }
+</style>
+    <center><h1>Bienvenido a la pagina de puntajes!</h1></center>
+    <div id="main-container">
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>USERNAME</th>
+                    <th>SCORE</th>
+                </tr>
+            </thead>
         {{#each users}}
             <tr>
                 <td>{{this.nombre_usuario}}</td>
@@ -7,4 +42,9 @@
             </tr>
         {{/each}}
     </table>
+    </div>
+        <div class="col-auto shadow p-3 mb-5 bg-light rounded border border-success" id="agradecimientos">
+        <h4>Muchas gracias por jugar a sostenibLE. Esperamos que hayas conocido un poco mas sobre la agenda 2030 con nuestro juego.</h4>
+        <h4>Les agradecemos Santino Amadey, Thiago Gasparini, Santino Lo Prete y Juan Ignacio Suleta</h4>
+    </div>
 </main>

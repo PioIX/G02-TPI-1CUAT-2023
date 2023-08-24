@@ -69,7 +69,7 @@ app.post('/register', async function(req, res)
     
     await MySQL.realizarQuery(`INSERT INTO usuarios (dni,nombre_usuario, nombre_completo, contraseña_usuario, usuario_admin, puntaje) VALUES("${req.body.dni}","${req.body.Usuario}", "${req.body.Name}", "${req.body.Contraseña}", ${false}, ${0})`)
     
-    res.render('home', {usuario: req.body.Usuario})
+    res.render('login', null)
 }
 )
 app.post('/login', async function(req, res)
@@ -86,10 +86,11 @@ app.post('/login', async function(req, res)
         if (usuarios[i].nombre_usuario == req.body.usuario) {
             if (usuarios[i].contraseña_usuario == req.body.contraseña) {
                 verificar = 1
-                usuarios[i].id_usuario = id_logeado
+                id_logeado = usuarios[i].id_usuario
+                console.log(id_logeado)
                 if (usuarios[i].usuario_admin == true) {
                     verificar = 2
-                    usuarios[i].id_usuario = id_logeado
+                    id_logeado = usuarios[i].id_usuario
                 }
             }
         }
@@ -102,6 +103,7 @@ app.post('/login', async function(req, res)
     }
     else if(verificar == 1) {
         console.log("logeado lv user normal")
+        console.log(id_logeado)
         res.render('home', {users: usuarios, words: palabras})
     }
     else if (verificar == 2) {
@@ -214,17 +216,16 @@ app.delete('/deletePuntaje',async function(req, res) {
     }
 })
 app.put('/sumaPoints',async function(req, res) {
-    let usuarios = await MySQL.realizarQuery(`SELECT * FROM usuarios`)
-    let inicial = await MySQL.realizarQuery(`SELECT puntaje FROM usuarios WHERE id_usuario = "${id_logeado}"`)
-    let sumaPuntos = inicial + req.body.Points
-    for(let i in usuarios) {
-        if (usuarios[i].id_usuario = id_logeado) {
-            await MySQL.realizarQuery(`UPDATE usuarios SET puntaje = ${sumaPuntos} WHERE nombre_usuario = "${req.body.nameUserDelete}"`)
-        }
-    }
+    validar = true
+    let user = await MySQL.realizarQuery(`SELECT * FROM usuarios WHERE id_usuario = "${id_logeado}"`)
+    user[0].puntaje = user[0].puntaje + req.body.Points
+    sumaPuntos = await MySQL.realizarQuery(`UPDATE usuarios SET puntaje = ${user[0].puntaje} WHERE id_usuario = "${id_logeado}"`)
+    res.send({validar: true})
 })
 
 app.get('/goToPoints',async function(req, res) {
+    let palabras = await MySQL.realizarQuery("SELECT * FROM palabras")
+    let usuarios = await MySQL.realizarQuery("SELECT * FROM usuarios ORDER BY puntaje DESC")
     res.render('puntajes', {users: usuarios, words: palabras})  
 })
 

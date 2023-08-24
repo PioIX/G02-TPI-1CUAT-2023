@@ -150,3 +150,11 @@
     right: 0;
     margin: auto;
 }
+
+#agradecimientos{
+    position: absolute;
+    top: 60%;
+    bottom: 10%;
+    left: 35%;
+    right: 35%; 
+}
